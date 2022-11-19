@@ -48,16 +48,15 @@ html {
 
 .container {
   display: flex;
-  min-height: calc(100vh - 50px);
 }
 .container .sidebar {
   background-color: #191927;
-  height: calc(100vh - 50px);
+  height: calc(100vh - 49px);
   min-width: 270px;
   flex: 1;
   position: -webkit-sticky;
   position: sticky;
-  top: 50px;
+  top: 49px;
   border-right: 1px solid rgba(230, 232, 237, 0.1019607843);
 }
 .container .sidebar .navigation-mobile {
@@ -81,9 +80,10 @@ html {
 .container .main .card {
   padding: 25px 15px;
   color: #D6D8E1;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 2rem;
 }
 .container .main .card div {
   width: 500px;
@@ -124,7 +124,7 @@ html {
     flex: 1;
   }
   .container .main .card {
-    grid-template-columns: 1fr;
+    flex-direction: column;
   }
   .container .main .card div {
     width: auto;

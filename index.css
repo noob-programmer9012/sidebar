@@ -19,13 +19,31 @@ html {
   z-index: 1;
   border-bottom: 2px solid #F7C46C;
 }
+.navbar .side-toggle {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+.navbar .side-toggle .mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  cursor: pointer;
+}
+.navbar .side-toggle .sticks {
+  background-color: #F7C46C;
+  width: 35px;
+  height: 5px;
+  border-radius: 10px;
+}
 .navbar h1 {
   color: #FFFFFF;
   font-weight: 600;
   letter-spacing: 5px;
   cursor: pointer;
 }
-.navbar h1 span {
+.navbar h1 > span {
   color: #F7C46C;
 }
 .navbar .navigation {
@@ -34,17 +52,6 @@ html {
   list-style: none;
   color: #FFFFFF;
 }
-.navbar .mobile {
-  display: none;
-}
-.navbar .mobile div {
-  background-color: #FFFFFF;
-  width: 30px;
-  height: 5px;
-}
-.navbar .mobile .focused {
-  background-color: #F7C46C;
-}
 
 .container {
   display: flex;
@@ -52,11 +59,11 @@ html {
 .container .sidebar {
   background-color: #191927;
   height: calc(100vh - 49px);
-  min-width: 270px;
-  flex: 1;
+  max-width: 270px;
   position: -webkit-sticky;
   position: sticky;
   top: 49px;
+  z-index: 0;
   border-right: 1px solid rgba(230, 232, 237, 0.1019607843);
 }
 .container .sidebar .navigation-mobile {
@@ -85,11 +92,120 @@ html {
   justify-content: space-evenly;
   gap: 2rem;
 }
-.container .main .card div {
-  width: 500px;
-  height: 500px;
+.container .main .card .view {
+  flex: 2;
+  min-height: 500px;
   background-color: #222230;
   border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container .main .card .view .table {
+  border-collapse: collapse;
+  border: 1px solid rgba(230, 232, 237, 0.1019607843);
+  width: 90%;
+}
+.container .main .card .view .table .material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+}
+.container .main .card .view .table .edit, .container .main .card .view .table .delete {
+  padding: 0px 5px 0px 5px;
+  background-color: inherit;
+  margin-right: 5px;
+  border: none;
+  cursor: pointer;
+}
+.container .main .card .view .table .edit {
+  color: #F7C46C;
+}
+.container .main .card .view .table .delete {
+  color: rgb(255, 0, 0);
+}
+.container .main .card .view .table thead {
+  background-color: #346CB0;
+}
+.container .main .card .view .table th {
+  text-align: left;
+}
+.container .main .card .view .table th, .container .main .card .view .table td {
+  padding: 15px 10px;
+  border: 1px solid rgba(230, 232, 237, 0.1019607843);
+}
+.container .main .card .view .table tr:nth-child(even) {
+  background-color: #191927;
+}
+.container .main .card .control {
+  flex: 1;
+  min-height: 500px;
+  background-color: #222230;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  align-items: center;
+}
+.container .main .card .control .form {
+  width: 90%;
+  height: 300px;
+}
+.container .main .card .control .form form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.9rem;
+}
+.container .main .card .control .form form .form-label {
+  color: #A6ABBD;
+  margin-bottom: 12px;
+}
+.container .main .card .control .form form .form-control {
+  width: 100%;
+  border: none;
+  background-color: inherit;
+  border-bottom: 3px solid #F7C46C;
+  font-size: 1.5rem;
+  color: #FFFFFF;
+}
+.container .main .card .control .form form .form-control:focus {
+  outline: none;
+}
+.container .main .card .control .form form .buttons {
+  display: inline-flex;
+  gap: 0.5rem;
+}
+.container .main .card .control .form form .buttons .save, .container .main .card .control .form form .buttons .cancel {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  color: #FFFFFF;
+  background-color: inherit;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+.container .main .card .control .form form .buttons .save {
+  background-color: #F7C46C;
+}
+.container .main .card .control .form form .buttons .cancel {
+  background-color: red;
+}
+
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(128, 128, 128, 0.349);
+  display: none;
+}
+
+.show-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media only screen and (max-width: 840px) {
@@ -104,13 +220,12 @@ html {
   }
   .container .sidebar {
     display: none;
+    max-width: 50%;
   }
   .container .sidebar .navigation-mobile {
     display: flex;
     list-style: none;
     flex-direction: column;
-  }
-  .container .sidebar .navigation-mobile {
     margin-top: 20px;
     color: #A6ABBD;
   }

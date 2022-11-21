@@ -46,6 +46,7 @@
         <div class="main">
             <div class="card">
                 <div class="view">
+                    <input type="text" class="search" id="search" autocomplete="off" placeholder="Search" onkeyup="filterTable()">
                     <table class="table" id="myTable">
                         <thead>
                             <tr>
@@ -88,14 +89,14 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">DELETE</h5>
-                    <button type="button" class="close"></button>
+                    <h5>DELETE</h5>
+                    <button type="button" class="close" id="modal-close">X</button>
                 </div>
                 <div class="modal-body" id="modalbody">                
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger" id="confirm">Delete</button>
+                    <button type="button" class="close-modal" id="modal-close">Close</button>
+                    <button type="button" class="confirm" id="confirm">Delete</button>
                 </div>
             </div>
         </div>

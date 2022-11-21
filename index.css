@@ -201,6 +201,29 @@ html {
   background-color: rgba(128, 128, 128, 0.349);
   display: none;
 }
+.modal .modal-dialog {
+  width: 50%;
+  height: auto;
+}
+.modal .modal-dialog .modal-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.modal .modal-dialog .modal-content .modal-header, .modal .modal-dialog .modal-content .modal-body, .modal .modal-dialog .modal-content .modal-footer {
+  display: inline-flex;
+  border-bottom: 2px solid black;
+  background-color: rgb(182, 181, 181);
+  color: #191927;
+  padding: 20px 10px;
+  width: 100%;
+}
+.modal .modal-dialog .modal-content .modal-header .close::after, .modal .modal-dialog .modal-content .modal-body .close::after, .modal .modal-dialog .modal-content .modal-footer .close::after {
+  content: "X";
+}
+.modal .modal-dialog .modal-content .modal-body {
+  padding: 100px 10px;
+}
 
 .show-modal {
   display: flex;

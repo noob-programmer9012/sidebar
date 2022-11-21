@@ -71,7 +71,23 @@ document.addEventListener('DOMContentLoaded', () => {
   remove.forEach(item => {
     item.addEventListener('click', e => {
       const modal = document.querySelector('#modal')
+      let modalBody = document.querySelector('.modal-body')
       modal.classList.add('show-modal')
+      modalBody.innerHTML = `Delete ${localStorage.key(e.target.title)}`
     })
   })
 })
+
+const close = document.querySelector('.close')
+const modal = document.querySelector('#modal')
+
+function closeModal () {
+  modal.classList.remove('show-modal')
+}
+
+modal.addEventListener('click', e => {
+  if (e.target.id === 'modal') {
+    closeModal()
+  }
+})
+close.addEventListener('click', closeModal)

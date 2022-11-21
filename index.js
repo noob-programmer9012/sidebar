@@ -18,16 +18,57 @@ function setAttributes (elem, attr) {
   }
 }
 
+let obj = new Object()
+
+for (let i = 0; i < localStorage.length; i++) {
+  obj[localStorage.key(i)] = localStorage.getItem(localStorage.key(i))
+}
+
 let tbody = document.querySelector('tbody')
+const save = document.querySelector('#save')
+
+function duplicate (transporter, gst) {
+  for (const elem in obj) {
+    if (`${elem}` === transporter && `${obj[elem]}` === gst) {
+      return true
+    }
+  }
+  return false
+}
+
+function saveData (e) {
+  let form = document.querySelector('form')
+  e.preventDefault()
+  if (trans.value !== '' && gst.value !== '') {
+    if (e.target.innerText === 'Submit') {
+      // localStorage.setItem(trans.value, gst.value)
+      localStorage.setItem(trans.value, gst.value)
+      window.location.reload()
+    } else if (e.target.innerText === 'Change') {
+      if (!duplicate(trans.value, gst.value)) {
+        localStorage.removeItem(e.target.value)
+        localStorage.setItem(trans.value, gst.value)
+        form.reset()
+      }
+      window.location.reload()
+    }
+  } else {
+    alert('empty')
+  }
+}
+
+save.addEventListener('click', saveData)
+
 let tr, td0, td1, td2, td3, key, value, edit, remove
 
 document.addEventListener('DOMContentLoaded', () => {
   // Load Data from local storage
-  for (let i = 0; i < localStorage.length; i++) {
+  const data = Object.keys(obj).sort()
+  for (let i = 0; i < data.length; i++) {
     // Dynamically add data to the table
     counter = document.createTextNode(i + 1)
-    key = document.createTextNode(localStorage.key(i))
-    value = document.createTextNode(localStorage.getItem(localStorage.key(i)))
+    key = document.createTextNode(data[i])
+    value = document.createTextNode(obj[data[i]])
 
     // Print Values on table
     tr = document.createElement('tr')
@@ -73,21 +114,17 @@ document.addEventListener('DOMContentLoaded', () => {
       const modal = document.querySelector('#modal')
       let modalBody = document.querySelector('.modal-body')
       modal.classList.add('show-modal')
-      modalBody.innerHTML = `Delete ${localStorage.key(e.target.title)}`
+    })
+  })
+
+  // Edit elements
+  edit = document.querySelectorAll('#edit')
+  edit.forEach(item => {
+    item.addEventListener('click', e => {
+      save.innerText = 'Change'
+      trans.value = data[e.target.title]
+      gst.value = obj[trans.value]
+      save.value = data[e.target.title]
     })
   })
 })
-
-const close = document.querySelector('.close')
-const modal = document.querySelector('#modal')
-
-function closeModal () {
-  modal.classList.remove('show-modal')
-}
-
-modal.addEventListener('click', e => {
-  if (e.target.id === 'modal') {
-    closeModal()
-  }
-})
-close.addEventListener('click', closeModal)
